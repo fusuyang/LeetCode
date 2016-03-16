@@ -1,3 +1,10 @@
+/**
+ *PROBLEM: 
+ *There are two sorted arrays nums1 and nums2 of size m and n respectively. 
+ *Find the median of the two sorted arrays. The overall run time complexity 
+ *should be O(log (m+n)).
+ */
+
 class Solution {
 public:
 	using vii = vector<int>::iterator;
@@ -8,13 +15,14 @@ public:
 		findKth(nums1.begin(), nums1.end(), nums2.begin(), nums2.end(), k);
 		double result = 0;
 		if ((size1 + size2) % 2 == 0) //when size1+size2 is even, median is (kth +(k+1)th)/2
-			result = (*findKth(nums1.begin(), nums1.end(), nums2.begin(), nums2.end(), k) + *findKth(nums1.begin(), nums1.end(), nums2.begin(), nums2.end(), k + 1)) / 2.0;
+			result = (*findKth(nums1.begin(), nums1.end(), nums2.begin(), nums2.end(), k)
+					 + *findKth(nums1.begin(), nums1.end(), nums2.begin(), nums2.end(), k + 1)) / 2.0;
 		else //when size1+size2 is odd, median is (k+1)th
 			result = *findKth(nums1.begin(), nums1.end(), nums2.begin(), nums2.end(), k + 1);
 		return result;
 	}
 private:
-	vii findKth(vii beg1, vii end1, vii beg2, vii end2, int k) { //find kth number of two sorted container, k is not more than amount of elements in two container
+	vii findKth(vii beg1, vii end1, vii beg2, vii end2, int k) { //find kth number of two sorted container, k <= size1+size2
 		if (end1 - beg1 > end2 - beg2)
 			return findKth(beg2, end2, beg1, end1, k);
 		int size1 = end1 - beg1;
